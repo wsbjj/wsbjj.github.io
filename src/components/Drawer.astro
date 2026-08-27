@@ -1,0 +1,68 @@
+---
+import { SITE, LINKS } from "@consts"
+import { cn } from "@lib/utils"
+
+const { pathname } = Astro.url
+const subpath = pathname.match(/[^/]+/g)
+---
+
+<div id="drawer" class="fixed inset-0 z-40 flex h-0 flex-col items-center justify-center overflow-hidden bg-neutral-100 transition-[height] duration-300 ease-in-out md:hidden dark:bg-neutral-900">
+  <nav class="flex flex-col items-center gap-2">
+    {
+      LINKS.map((link) => {
+        const active = pathname === link.HREF || "/" + subpath?.[0] === link.HREF
+        return (
+          <a
+            href={link.HREF}
+            class={cn(
+              "flex items-center justify-center rounded-lg px-4 py-2 transition-colors duration-300",
+              active
+                ? "bg-black text-white dark:bg-white dark:text-black"
+                : "hover:bg-black/5 hover:text-black dark:hover:bg-white/10 dark:hover:text-white",
+            )}
+          >
+            {link.TEXT}
+          </a>
+        )
+      })
+    }
+    <a
+      href="https://github.com/wsbjj"
+      target="_blank"
+      rel="noreferrer"
+      class="rounded-lg px-4 py-2 transition-colors duration-300 hover:bg-black/5 hover:text-black dark:hover:bg-white/10 dark:hover:text-white"
+    >
+      GitHub
+    </a>
+  </nav>
+
+  <div class="mt-5 flex gap-2">
+    <a
+      href="/search"
+      aria-label={`在 ${SITE.TITLE} 的网站中搜索项目`}
+      class="flex size-9 items-center justify-center rounded-lg border border-black/10 p-2 transition-colors duration-300 hover:bg-black/5 dark:border-white/20 dark:hover:bg-white/10"
+    >
+      <svg class="size-full stroke-current">
+        <use href="/ui.svg#search"></use>
+      </svg>
+    </a>
+    <button
+      id="drawer-theme-button"
+      aria-label="切换明暗主题"
+      class="flex size-9 items-center justify-center rounded-lg border border-black/10 p-2 transition-colors duration-300 hover:bg-black/5 dark:border-white/20 dark:hover:bg-white/10"
+    >
+      <svg class="block size-full stroke-current dark:hidden">
+        <use href="/ui.svg#sun"></use>
+      </svg>
+      <svg class="hidden size-full stroke-current dark:block">
+        <use href="/ui.svg#moon"></use>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  #drawer.open {
+    @apply h-full;
+  }
+</style>

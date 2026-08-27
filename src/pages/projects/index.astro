@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import ProjectCard from "@components/ProjectCard.astro"
+import { PROJECTS } from "@consts"
+
+const projects = (await getCollection("projects"))
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+  <TopLayout>
+    <div class="animate max-w-2xl">
+      <h1 class="mt-2 text-4xl font-semibold text-black dark:text-white">{PROJECTS.TITLE}</h1>
+      <p class="mt-3 text-lg leading-relaxed">{PROJECTS.DESCRIPTION}</p>
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <div class="grid gap-5 pb-16 md:grid-cols-2">
+      {projects.map((project, index) => (
+        <div class="animate">
+          <ProjectCard entry={project} priority={index < 2} />
+        </div>
+      ))}
+    </div>
+  </BottomLayout>
+</PageLayout>

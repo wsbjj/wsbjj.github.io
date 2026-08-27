@@ -1,0 +1,158 @@
+---
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import Container from "@components/Container.astro"
+import ProjectCard from "@components/ProjectCard.astro"
+import TwinklingStars from "@components/TwinklingStars.astro"
+import MeteorShower from "@components/MeteorShower.astro"
+import { SITE } from "@consts"
+
+const projects = (await getCollection("projects"))
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+
+const featuredProjects = projects.filter((project) => project.data.featured).slice(0, 4)
+---
+
+<PageLayout title="首页" description={SITE.DESCRIPTION}>
+  <div class="pointer-events-none absolute inset-0 block dark:hidden">
+    <div id="particles1" class="fixed inset-0"></div>
+    <div id="particles2" class="fixed inset-0"></div>
+    <div id="particles3" class="fixed inset-0"></div>
+  </div>
+
+  <div class="pointer-events-none absolute inset-0 hidden bg-black dark:block">
+    <div id="stars1" class="fixed inset-0"></div>
+    <div id="stars2" class="fixed inset-0"></div>
+    <div id="stars3" class="fixed inset-0"></div>
+  </div>
+
+  <div id="galaxy" class="pointer-events-none fixed inset-0 hidden dark:block">
+    <TwinklingStars />
+    <MeteorShower />
+  </div>
+
+  <script is:inline src="/js/bg.js"></script>
+
+  <section class="relative isolate flex min-h-[92dvh] items-center overflow-hidden pb-12 pt-20">
+    <img
+      src="/assets/profile.png"
+      alt="Bu Junjie 的 GitHub 头像"
+      width="460"
+      height="460"
+      fetchpriority="high"
+      class="absolute inset-0 -z-20 size-full object-cover object-top"
+    />
+    <div class="absolute inset-0 -z-10 bg-white/75 dark:bg-black/70" aria-hidden="true"></div>
+
+    <Container size="lg">
+      <div class="animate max-w-2xl py-10 sm:py-14">
+          <p class="text-sm font-semibold uppercase text-accent">IoT / AI Agents</p>
+          <h1 class="mt-4 text-5xl font-bold leading-tight text-black sm:text-6xl lg:text-7xl dark:text-white">
+            Bu Junjie
+          </h1>
+          <p class="mt-5 max-w-xl text-lg leading-relaxed">
+            物联网学生与开发者，关注 AI Agent、多智能体协作和本地优先工具。
+          </p>
+          <p class="mt-3 text-sm font-semibold text-black/60 dark:text-white/60">
+            Hanshan Normal University · Guangdong, China
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/projects" class="inline-flex items-center gap-2 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent dark:bg-white dark:text-black dark:hover:bg-accent dark:hover:text-white">
+              查看项目
+              <svg class="size-4 stroke-current" aria-hidden="true">
+                <use href="/ui.svg#arrow-right"></use>
+              </svg>
+            </a>
+            <a href="https://github.com/wsbjj" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-black/20 bg-white/45 px-5 py-3 text-sm font-semibold text-black backdrop-blur-sm transition hover:border-accent hover:text-accent dark:border-white/25 dark:bg-black/35 dark:text-white">
+              <svg class="size-4 fill-current" aria-hidden="true">
+                <use href="/social.svg#github"></use>
+              </svg>
+              GitHub
+            </a>
+          </div>
+      </div>
+    </Container>
+  </section>
+
+  <div class="relative bg-white dark:bg-black">
+    <section class="border-t border-black/10 py-20 dark:border-white/15">
+      <Container size="lg">
+        <div class="grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:gap-20">
+          <h2 class="animate text-3xl font-semibold text-black dark:text-white">关于我</h2>
+          <div class="animate space-y-5 text-lg leading-relaxed">
+            <p>
+              目前就读于 Hanshan Normal University，持续探索物联网、AI Agent 与多智能体协作。
+            </p>
+            <p>
+              我的公开项目覆盖任务驱动 Agent、AI 文档审查、图像工作流、桌面应用和数据分析，重点是把模型能力接入可以实际使用的产品流程。
+            </p>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="py-20">
+      <Container size="lg">
+        <div class="animate max-w-2xl">
+          <h2 class="text-3xl font-semibold text-black dark:text-white">代表项目</h2>
+          <p class="mt-3 leading-relaxed">从 GitHub 公开仓库中选出的近期项目。</p>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {featuredProjects.map((project, index) => (
+            <div class="animate">
+              <ProjectCard entry={project} priority={index < 2} />
+            </div>
+          ))}
+        </div>
+        <div class="animate mt-8">
+          <a href="/projects" class="inline-flex items-center gap-2 rounded-lg border border-black/15 px-4 py-2.5 font-semibold text-black transition hover:border-accent hover:text-accent dark:border-white/20 dark:text-white">
+            查看项目
+            <svg class="size-5 stroke-current">
+              <use href="/ui.svg#arrow-right"></use>
+            </svg>
+          </a>
+        </div>
+      </Container>
+    </section>
+
+    <section class="border-y border-black/10 py-20 dark:border-white/15">
+      <Container size="lg">
+        <div class="grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:gap-20">
+          <h2 class="animate text-3xl font-semibold text-black dark:text-white">关注方向</h2>
+          <dl class="animate grid gap-8 sm:grid-cols-2">
+            <div>
+              <dt class="font-semibold text-black dark:text-white">AI Agent</dt>
+              <dd class="mt-2 text-sm leading-relaxed">ReAct、任务编排、多智能体协作和外部工具集成。</dd>
+            </div>
+            <div>
+              <dt class="font-semibold text-black dark:text-white">全栈应用</dt>
+              <dd class="mt-2 text-sm leading-relaxed">TypeScript、Python、Java，以及桌面端和 Web 产品。</dd>
+            </div>
+            <div class="sm:col-span-2">
+              <dt class="font-semibold text-black dark:text-white">物联网</dt>
+              <dd class="mt-2 text-sm leading-relaxed">围绕连接、数据与智能决策持续学习和实践。</dd>
+            </div>
+          </dl>
+        </div>
+      </Container>
+    </section>
+
+    <section class="py-20">
+      <Container size="lg">
+        <div class="animate flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <div>
+            <h2 class="text-3xl font-semibold text-black dark:text-white">更多代码与实验</h2>
+            <p class="mt-3">完整公开仓库、提交记录和最新进展都在 GitHub。</p>
+          </div>
+          <a href="https://github.com/wsbjj" target="_blank" rel="noreferrer" class="inline-flex shrink-0 items-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-black dark:hover:bg-white dark:hover:text-black">
+            访问 GitHub
+            <svg class="size-5 fill-current">
+              <use href="/social.svg#github"></use>
+            </svg>
+          </a>
+        </div>
+      </Container>
+    </section>
+  </div>
+</PageLayout>

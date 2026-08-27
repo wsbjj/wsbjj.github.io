@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content"
+import { formatDate } from "@lib/utils"
+
+type Props = {
+  entry: CollectionEntry<"projects">
+}
+
+const { entry } = Astro.props
+const { title, summary, date, demoUrl, repoUrl, image, imageAlt } = entry.data
+---
+
+<div>
+  <a href="/projects" class="inline-flex items-center gap-2 rounded-lg border border-black/15 px-3 py-2 text-sm transition hover:border-accent hover:text-accent dark:border-white/20">
+    <svg class="size-4 rotate-180 stroke-current">
+      <use href="/ui.svg#arrow-right"></use>
+    </svg>
+    返回项目
+  </a>
+
+  <div class="mt-10 text-sm text-black/55 dark:text-white/55">{formatDate(date)} 更新</div>
+  <h1 class="mt-2 text-4xl font-semibold text-black dark:text-white">{title}</h1>
+  <p class="mt-3 max-w-2xl text-lg leading-relaxed">{summary}</p>
+
+  {(demoUrl || repoUrl) && (
+    <div class="mt-6 flex flex-wrap gap-3">
+      {demoUrl && (
+        <a href={demoUrl} target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-black/15 px-4 py-2.5 font-semibold transition hover:border-accent hover:text-accent dark:border-white/20">
+          <svg class="size-4 fill-current"><use href="/ui.svg#globe"></use></svg>
+          查看在线演示
+        </a>
+      )}
+      {repoUrl && (
+        <a href={repoUrl} target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-lg bg-black px-4 py-2.5 font-semibold text-white transition hover:bg-accent dark:bg-white dark:text-black dark:hover:bg-accent dark:hover:text-white">
+          <svg class="size-4 fill-current"><use href="/social.svg#github"></use></svg>
+          查看 GitHub 仓库
+        </a>
+      )}
+    </div>
+  )}
+
+  <img src={image} alt={imageAlt} width="1280" height="640" class="mt-10 aspect-[2/1] w-full rounded-lg border border-black/10 object-cover dark:border-white/15" />
+</div>

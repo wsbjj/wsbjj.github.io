@@ -1,0 +1,124 @@
+---
+import { SITE, LINKS } from "@consts"
+import { cn } from "@lib/utils"
+import Container from "@components/Container.astro"
+
+const { pathname } = Astro.url
+const subpath = pathname.match(/[^/]+/g)
+---
+
+<header id="header" class="fixed top-0 z-50 h-16 w-full">
+  <Container size="lg">
+    <div class="relative flex h-full w-full items-center justify-between">
+      <a href="/" class="flex items-center gap-2 font-semibold text-current transition-colors duration-300 hover:text-black dark:hover:text-white">
+        <span class="grid size-8 place-items-center rounded-lg bg-accent text-xs font-bold text-white">BJ</span>
+        <span>{SITE.TITLE}</span>
+      </a>
+
+      <nav class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 text-sm md:flex">
+        {
+          LINKS.map((link) => {
+            const active = pathname === link.HREF || "/" + subpath?.[0] === link.HREF
+            return (
+              <a
+                href={link.HREF}
+                class={cn(
+                  "flex h-9 items-center justify-center rounded-lg px-3 transition-colors duration-300",
+                  active
+                    ? "bg-black text-white dark:bg-white dark:text-black"
+                    : "hover:bg-black/5 hover:text-black dark:hover:bg-white/10 dark:hover:text-white",
+                )}
+              >
+                {link.TEXT}
+              </a>
+            )
+          })
+        }
+        <a
+          href="https://github.com/wsbjj"
+          target="_blank"
+          rel="noreferrer"
+          class="flex h-9 items-center justify-center rounded-lg px-3 transition-colors duration-300 hover:bg-black/5 hover:text-black dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          GitHub
+        </a>
+      </nav>
+
+      <div class="flex gap-1">
+        <a
+          href="/search"
+          aria-label="搜索项目"
+          class={cn(
+            "hidden size-9 items-center justify-center rounded-lg border border-black/10 p-2 transition-colors duration-300 md:flex dark:border-white/20",
+            pathname.startsWith("/search")
+              ? "bg-black text-white dark:bg-white dark:text-black"
+              : "hover:bg-black/5 hover:text-black dark:hover:bg-white/10 dark:hover:text-white",
+          )}
+        >
+          <svg class="size-full stroke-current">
+            <use href="/ui.svg#search"></use>
+          </svg>
+        </a>
+
+        <button
+          id="header-theme-button"
+          aria-label="切换明暗主题"
+          class="hidden size-9 items-center justify-center rounded-lg border border-black/10 p-2 transition-colors duration-300 hover:bg-black/5 hover:text-black md:flex dark:border-white/20 dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          <svg class="block size-full stroke-current dark:hidden">
+            <use href="/ui.svg#sun"></use>
+          </svg>
+          <svg class="hidden size-full stroke-current dark:block">
+            <use href="/ui.svg#moon"></use>
+          </svg>
+        </button>
+
+        <button
+          id="header-drawer-button"
+          aria-label="打开或关闭导航菜单"
+          class="flex size-9 items-center justify-center rounded-lg border border-black/10 p-2 transition-colors duration-300 hover:bg-black/5 md:hidden dark:border-white/20 dark:hover:bg-white/10"
+        >
+          <svg id="drawer-open" class="size-full stroke-current">
+            <use href="/ui.svg#menu"></use>
+          </svg>
+          <svg id="drawer-close" class="size-full stroke-current">
+            <use href="/ui.svg#x"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </Container>
+</header>
+
+<style>
+  #header-drawer-button > #drawer-open {
+    @apply block;
+  }
+
+  #header-drawer-button > #drawer-close {
+    @apply hidden;
+  }
+
+  #header-drawer-button.open > #drawer-open {
+    @apply hidden;
+  }
+
+  #header-drawer-button.open > #drawer-close {
+    @apply block;
+  }
+</style>
+
+<script is:inline>
+  function toggleDrawer() {
+    document.getElementById("drawer")?.classList.toggle("open")
+    document.getElementById("header-drawer-button")?.classList.toggle("open")
+  }
+
+  function initializeDrawerButton() {
+    const drawerButton = document.getElementById("header-drawer-button")
+    if (drawerButton) drawerButton.onclick = toggleDrawer
+  }
+
+  document.addEventListener("astro:after-swap", initializeDrawerButton)
+  initializeDrawerButton()
+</script>
