@@ -29,7 +29,7 @@ npm run build
 
 ## 内容来源
 
-个人简介和项目介绍根据 [wsbjj 的 GitHub 公开资料](https://github.com/wsbjj)整理。项目详情与最新状态以各仓库为准。首页背景取自 [S-OpenCow](https://github.com/wsbjj/S-OpenCow) 的公开工作台截图，不包含人物头像。
+个人简介和项目介绍根据 [wsbjj 的 GitHub 公开资料](https://github.com/wsbjj)整理。项目详情与最新状态以各仓库为准。首页背景采用 [Teddy GR 在 Unsplash 发布的极简工作区照片](https://unsplash.com/photos/gVpXbCGG6jI)，按 Unsplash License 使用，不包含人物头像。
 
 ## 模板与许可
 
