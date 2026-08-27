@@ -12,8 +12,9 @@ export default function ArrowCard({ entry }: Props) {
       class="group flex items-center gap-3 rounded-lg border border-black/15 p-4 transition-colors duration-300 hover:border-accent dark:border-white/20"
     >
       <div class="w-full">
-        <div class="text-xs text-black/55 dark:text-white/55">
-          {formatDate(entry.data.date)}
+        <div class="flex items-center gap-2 text-xs text-black/55 dark:text-white/55">
+          <span>{formatDate(entry.data.date)}</span>
+          {entry.data.fork && <span class="font-semibold text-accent">Fork</span>}
         </div>
         <div class="mt-2 font-semibold text-black group-hover:text-accent dark:text-white">
           {entry.data.title}

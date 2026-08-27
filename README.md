@@ -1,6 +1,6 @@
 # Bu Junjie 的个人网站
 
-这是 [wsbjj.github.io](https://wsbjj.github.io/) 的源码仓库，用于展示个人介绍与公开 GitHub 项目。
+这是 [wsbjj.github.io](https://wsbjj.github.io/) 的源码仓库，用于展示个人介绍与全部公开 GitHub 仓库。
 
 ## 技术栈
 
@@ -29,7 +29,7 @@ npm run build
 
 ## 内容来源
 
-个人简介和项目介绍根据 [wsbjj 的 GitHub 公开资料](https://github.com/wsbjj)整理。项目详情与最新状态以各仓库为准。
+个人简介和项目介绍根据 [wsbjj 的 GitHub 公开资料](https://github.com/wsbjj)整理。项目详情与最新状态以各仓库为准。首页背景取自 [S-OpenCow](https://github.com/wsbjj/S-OpenCow) 的公开工作台截图，不包含人物头像。
 
 ## 模板与许可
 

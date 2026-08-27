@@ -36,14 +36,14 @@ const featuredProjects = projects.filter((project) => project.data.featured).sli
 
   <section class="relative isolate flex min-h-[92dvh] items-center overflow-hidden pb-12 pt-20">
     <img
-      src="/assets/profile.png"
-      alt="Bu Junjie 的 GitHub 头像"
-      width="460"
-      height="460"
+      src="/assets/hero-workbench.png"
+      alt="S-OpenCow AI Agent 工作台界面"
+      width="1400"
+      height="924"
       fetchpriority="high"
-      class="absolute inset-0 -z-20 size-full object-cover object-top"
+      class="absolute inset-0 -z-20 size-full object-cover object-center"
     />
-    <div class="absolute inset-0 -z-10 bg-white/75 dark:bg-black/70" aria-hidden="true"></div>
+    <div class="absolute inset-0 -z-10 bg-white/85 dark:bg-black/80" aria-hidden="true"></div>
 
     <Container size="lg">
       <div class="animate max-w-2xl py-10 sm:py-14">
@@ -59,7 +59,7 @@ const featuredProjects = projects.filter((project) => project.data.featured).sli
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="/projects" class="inline-flex items-center gap-2 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent dark:bg-white dark:text-black dark:hover:bg-accent dark:hover:text-white">
-              查看项目
+              查看全部 {projects.length} 个项目
               <svg class="size-4 stroke-current" aria-hidden="true">
                 <use href="/ui.svg#arrow-right"></use>
               </svg>
@@ -85,7 +85,7 @@ const featuredProjects = projects.filter((project) => project.data.featured).sli
               目前就读于 Hanshan Normal University，持续探索物联网、AI Agent 与多智能体协作。
             </p>
             <p>
-              我的公开项目覆盖任务驱动 Agent、AI 文档审查、图像工作流、桌面应用和数据分析，重点是把模型能力接入可以实际使用的产品流程。
+              我的公开仓库覆盖任务驱动 Agent、AI 文档审查、图像工作流、桌面应用和数据分析，也包含持续维护与适配的开源 Fork。
             </p>
           </div>
         </div>
@@ -107,7 +107,7 @@ const featuredProjects = projects.filter((project) => project.data.featured).sli
         </div>
         <div class="animate mt-8">
           <a href="/projects" class="inline-flex items-center gap-2 rounded-lg border border-black/15 px-4 py-2.5 font-semibold text-black transition hover:border-accent hover:text-accent dark:border-white/20 dark:text-white">
-            查看项目
+            查看全部 {projects.length} 个项目
             <svg class="size-5 stroke-current">
               <use href="/ui.svg#arrow-right"></use>
             </svg>

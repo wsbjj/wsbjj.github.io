@@ -8,7 +8,7 @@ type Props = {
 }
 
 const { entry, priority = false } = Astro.props
-const { title, summary, date, tags, image, imageAlt } = entry.data
+const { title, summary, date, tags, image, imageAlt, fork } = entry.data
 ---
 
 <a
@@ -27,11 +27,14 @@ const { title, summary, date, tags, image, imageAlt } = entry.data
     />
   </div>
   <div class="flex flex-1 flex-col p-5">
-    <div class="text-xs text-black/55 dark:text-white/55">{formatDate(date)}</div>
-    <h3 class="mt-2 text-xl font-semibold text-black transition-colors group-hover:text-accent dark:text-white">
+    <div class="flex min-h-5 items-center justify-between gap-3 text-xs text-black/55 dark:text-white/55">
+      <span>{formatDate(date)}</span>
+      {fork && <span class="rounded border border-accent/35 px-1.5 py-0.5 font-semibold text-accent">Fork</span>}
+    </div>
+    <h3 class="mt-2 break-words text-xl font-semibold text-black transition-colors group-hover:text-accent dark:text-white">
       {title}
     </h3>
-    <p class="mt-2 flex-1 text-sm leading-relaxed">{summary}</p>
+    <p class="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed">{summary}</p>
     <div class="mt-5 flex items-end justify-between gap-4">
       <ul class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-black/55 dark:text-white/55">
         {tags.slice(0, 3).map((tag) => <li>{tag}</li>)}

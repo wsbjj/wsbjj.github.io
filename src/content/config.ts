@@ -11,6 +11,7 @@ const projects = defineCollection({
     image: z.string(),
     imageAlt: z.string(),
     featured: z.boolean().optional(),
+    fork: z.boolean().optional(),
     demoUrl: z.string().optional(),
     repoUrl: z.string().optional(),
   }),

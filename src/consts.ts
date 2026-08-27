@@ -10,7 +10,7 @@ export const SITE: Site = {
 // Projects Page
 export const PROJECTS: Page = {
   TITLE: "项目",
-  DESCRIPTION: "从公开 GitHub 仓库中选出的 AI Agent、桌面应用与全栈项目。",
+  DESCRIPTION: "完整收录 wsbjj 当前公开的 GitHub 仓库，包括原创项目与公开 Fork。",
 }
 
 // Search Page
